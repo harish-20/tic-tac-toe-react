@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+import Box from './components/Box';
+import Popup from './components/Popup';
 import './App.css';
+import { useState } from 'react';
 
 function App() {
+  const [win,setWin]= useState(false)
+
+  //get the winner and send it to popUp component
+  const checkWin=(val)=>{
+    setWin(val)
+  }
+  //if it called the pop up will closed
+const closePopup=(descision)=>{
+  if(descision){
+    setWin('')
+  }
+}
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Tic Tac Toe Game</h1>
+      <Box getWin={checkWin}/>
+      {win&&<Popup winner={win} closePopup={closePopup}/>}
     </div>
   );
 }
